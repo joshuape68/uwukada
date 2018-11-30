@@ -1,0 +1,24 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 98, in script
+    if Jihyeon_Introduction_Dialogue = False:
+SyntaxError: invalid syntax (script.rpy, line 98)
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 98, in script
+    if Jihyeon_Introduction_Dialogue = False:
+  File "/Users/joshuape/Desktop/Desktop/renpy-7.1.3-sdk/renpy/ast.py", line 1762, in execute
+    if renpy.python.py_eval(condition):
+  File "/Users/joshuape/Desktop/Desktop/renpy-7.1.3-sdk/renpy/python.py", line 1942, in py_eval
+    code = py_compile(code, 'eval')
+  File "/Users/joshuape/Desktop/Desktop/renpy-7.1.3-sdk/renpy/python.py", line 674, in py_compile
+    raise e
+SyntaxError: invalid syntax (script.rpy, line 98)
+
+Darwin-17.7.0-x86_64-i386-64bit
+Ren'Py 7.1.3.1092
+UwUkada 1.0
+Thu Nov 29 22:17:53 2018
