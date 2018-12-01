@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 98: reached end of line when expecting ':'.
-    if Jihyeon_Introduction_Dialogue = False
-                                            ^
+File "game/script.rpy", line 92: Line is indented, but the preceding scene statement statement does not expect a block. Please check this line's indentation.
+    menu:
+    ^
 
 Ren'Py Version: Ren'Py 7.1.3.1092
-Thu Nov 29 22:16:51 2018
+Fri Nov 30 00:43:54 2018

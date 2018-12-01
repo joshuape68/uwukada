@@ -22,7 +22,7 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg main quad
+    scene stanford
 
     # These display lines of dialogue.
 
@@ -30,10 +30,9 @@ label start:
     n "You're so excited to be on campus finally,
         and you can't wait to meet all the cool people here"
 
-    scene bg okada outside
+    scene okaka lounge
     y "Wow, this dorm is quite lovely! I love the theme!"
-    scene bg okada lounge
-    show c
+    show cheng hau
     c "Hi there! Welcome to Okada, I’m your RA Cheng Hau, and I use they/them pronouns."
     c "You must be?"
     python:
@@ -41,19 +40,20 @@ label start:
         pronouns = renpy.input("My pronouns are...")
     y "Hi I'm [name] and I use [pronouns]. It's nice to meet me, I mean you! Ahhh"
     y "I messed up already"
-    show h rightish
+    show huanvy at right
     h "Mood."
-    show d leftish
+    show edwin at left
     d "Y = mx + it be like that sometimes *hehe*"
     c "*cute laugh* Nice to meet you [name]"
     h "I'm Huanvy and I use they/them pronouns. I'm one of the ethnic theme associates"
     d "I'm Edwin and I use he/him prnouns. I'm also an ETA. Welcome to Okada [name]"
-    hide c
-    hide h
-    hide d
+    hide cheng hau
+    hide huanvy
+    hide edwin
+    scene black
     n "The staff are so super duper cool! And all very attractive ;)."
     n "You should head up to your room and unpack"
-    show bg black
+    scene room
     n "It is now night time, and you decide to explore around the dorm."
 
     #These are flags for if a person has successfully interacted with a
@@ -67,8 +67,12 @@ label start:
         Edwin_Progress_One = False
         Ysabel_Progress_One = False
         Huanvy_Progress_One = False
+
         #These are for introductions
         Jihyeon_Introduction_Dialogue = False
+        Manisha_Introduction_Dialogue = False
+        Pao_Introduction_Dialogue = False
+        Ysabel_Introduction_Dialogue = False
 
     #This label first_night has the menu for the options of where to go
     label first_night:
@@ -83,23 +87,28 @@ label start:
         #This label Second_Floor_first_night has the options for Jihyeon
         #Manisha, or just going back to the first_night menu
         label .Second_Floor_first_night:
-                menu:
-                    "You hear someone singing Girls Generation":
-                        jump .Jihyeon_first_night
-                    "You hear Punjabi music playing":
-                        jump .Manisha_first_night
-                    "Go back":
-                        jump first_night
+            scene second floor
+            menu:
+                "You hear someone singing Girls Generation":
+                    jump .Jihyeon_first_night
+                "You hear Punjabi music playing":
+                    jump .Manisha_first_night
+                "Go back":
+                    jump first_night
 
         #This label Jihyeon_first_night has the Jihyeon interaction
         label .Jihyeon_first_night:
-            show j
+            scene jihyeon door
             #This is vital to ensuring that a person introduces only 1 time
             if Jihyeon_Introduction_Dialogue == False:
                 n "You check out the room that the singing is coming from"
+                scene jihyeon room
+                show jihyeon
                 j "Oh hi I'm the RCC Jihyeon and I use she/her prnouns"
                 y "Oh hi I'm [name] and I use [pronouns]"
                 $ Jihyeon_Introduction_Dialogue = True
+            scene jihyeon room
+            show jihyeon
             j "Do you want to come in?"
             menu:
                 "Yes":
@@ -108,13 +117,13 @@ label start:
                 #Saying no doesn't lock people out
                 "No":
                     jump first_night
-            j "Have a seat. I was just singing some Girls Generation"
             label .Yes:
+                j "Have a seat. I was just singing some Girls Generation"
                 menu:
                     "I love K-pop":
-                        jump Jihyeon_first_night.I_Love_K_Pop
+                        jump .I_Love_K_Pop
                     "Oh, K-pop is lame":
-                        jump Jihyeon_first_night.K_Pop_Is_Lame
+                        jump .K_Pop_Is_Lame
             #This is the good line that allows people to progress Jihyeon
             label .I_Love_K_Pop:
                 y "I love K-Pop"
@@ -125,22 +134,23 @@ label start:
                 j "Do you want to watch music videos right now?"
                 y "Yes!!!"
                 hide j
-                scene bg black
+                scene black
                 n "You watch music videos for 2 hours, laughing, giggling, and having fun"
-                scene j
-                show j
+                scene jihyeon room
+                show jihyeon
                 j "Hey this was really fun. We should do this again sometime"
                 #This flag turns True allowing for progress
                 $ Jihyeon_Progress_One = True
+                jump first_night
             #This is one of the bad lines that lock people out of Jihyeon
-            label .K_Pop_Is_Lame:
-                j "Oh okay. What do you like?"
-                $ jihyeon_I_Like = renpy.input("I like")
-                y "I like [jihyeon_I_Like]"
-                j "Oh yeah, that's cool."
-                n "There's an awkward silence"
-                j "Hey I thinking I'm going to sleep soon"
-                y "Ok"
+        label .K_Pop_Is_Lame:
+            j "Oh okay. What do you like?"
+            $ jihyeon_I_Like = renpy.input("I like")
+            y "I like [jihyeon_I_Like]"
+            j "Oh yeah, that's cool."
+            n "There's an awkward silence"
+            j "Hey I thinking I'm going to sleep soon"
+            y "Ok"
 
         #This labe Manisha_first_night is the first interaction with Manisha
         label .Manisha_first_night:
@@ -157,15 +167,24 @@ label start:
                     jump .yes
                 "No thanks":
                     jump .no
+            #Good progression
             label .yes:
                 m "Hey do you want to see me dance?"
-                y "Sure I'd love to"
+                y "Yeah of course I do!"
                 m "Here let me just turn the music back on *turns music on*"
                 n "*Manisha dances*"
-                y "Wow you're really good at dancing"
+                y "Wow you're really good at dancing."
                 m "Thanks. Hey do you want to learn some steps?"
-
+                y "Sure I'd love to!"
+                m "Great *hehe*"
+                n "*Manisha shows you some steps and you two dance together*"
+                y "Wow that was really fun."
+                m "Yeah that was. You're a good dancer. We should dance again sometime."
+                $ Manisha_Progress_One = True
+            #Bad progression
             label .no:
+                m "Oh okay. Well I need to practice some more so...."
+                y "Yeah alright, I'll leave."
         label .First_Floor_first_night:
             menu:
                 "You feel drawn to some wise aura":
@@ -183,7 +202,18 @@ label start:
                     jump Huanvy_first_night
                 "You feel the vibrations of someone wiggling":
                     jump Ysabel_first_night
+                "Go back":
+                    jump first_night
         label .Huanvy_first_night:
+            h "Oh hey [name] I'm flyering for the Equity for ETAs campaign"
+            menu:
+                "Can I help out?":
+                    jump .Huanvy_Can_I_Help_Out
+                "Oh that's cool (Keep Walking)":
+                    jump .Courtyard_first_night
+            label .Huanvy_Can_I_Help_Out:
+                h "Oh yeah that'd be great. Here's a stack of flyers"
+                y "Oh I see I see this is interesting. Wait Stanford only pays you"
 
         label .Ysabel_first_night:
 
