@@ -14,11 +14,68 @@ define h = Character("Huanvy", who_color="#1ad1ff")#blue
 define d = Character("Edwin", who_color="#df80ff")#purple
 define ys = Character("Ysabel", who_color="#ff9933")#orange
 
+init python:
+    #Progress_One is for if the player has successfully interacted.
+    #The flag turns true to allow for progress in the next section
+    Jihyeon_Progress_One = False
+    Manisha_Progress_One = False
+    Cheng_Hau_Progress_One = False
+    Pao_Progress_One = False
+    Edwin_Progress_One = False
+    Ysabel_Progress_One = False
+    Huanvy_Progress_One = False
+
+    #These are flags for if a person has interacted completely through
+    #the interaction with a character, whether they went through the
+    #positive route or not
+    Jihyeon_Part_One = False
+    Manisha_Part_One = False
+    Cheng_Hau_Part_One = False
+    Pao_Part_One = False
+    Edwin_Part_One = False
+    Ysabel_Part_One = False
+    Huanvy_Part_One = False
+
+    #These are for introductions of people who haven't been introduced
+    #yet in label start
+    Jihyeon_Introduction_Dialogue = False
+    Manisha_Introduction_Dialogue = False
+    Pao_Introduction_Dialogue = False
+    Ysabel_Introduction_Dialogue = False
+
+    #Successful interaction in part two, for part three
+    Jihyeon_Progress_Two = False
+    Manisha_Progress_Two = False
+    Cheng_Hau_Progress_Two = False
+    Pao_Progress_Two = False
+    Edwin_Progress_Two = False
+    Ysabel_Progress_Two = False
+    Huanvy_Progress_Two = False
+
+    #Any interaction in part two
+    Jihyeon_Part_Two = False
+    Manisha_Part_Two = False
+    Cheng_Hau_Part_Two = False
+    Pao_Part_Two = False
+    Edwin_Part_Two = False
+    Ysabel_Part_Two = False
+    Huanvy_Part_Two = False
+
+    #Intro to interaction two
+    Huanvy_Part_Two_Intro = False
+    Edwin_Part_Two_Intro = False
+    Manisha_Part_Two_Intro = False
+    Jihyeon_Part_Two_Intro = False
+    Ysabel_Part_Two_Intro = False
+    Pao_Part_Two_Intro = False
+    Cheng_Hau_Part_Two_Intro = False
+
 
 # The game starts here.
 
 label start:
     scene stanford
+    with dissolve
     n "This is your first day at Stanford University!"
     n "You're so excited to be on campus finally,
         and you can't wait to meet all the cool people here!"
@@ -52,37 +109,7 @@ label start:
     y "Ahhh, finally finished unpacking."
     n "It is now night time, and you decide to explore around the dorm."
 
-    python:
-        #These are flags for if a person has successfully interacted with a
-        #a character. These will be used for the next set of interactions to
-        #see if they can progress in the interaction tree. Josh is not included,
-        #because he has to be introduced as a character, and he is the default
-        #person to date if you don't date anyone else
-        Jihyeon_Progress_One = False
-        Manisha_Progress_One = False
-        Cheng_Hau_Progress_One = False
-        Pao_Progress_One = False
-        Edwin_Progress_One = False
-        Ysabel_Progress_One = False
-        Huanvy_Progress_One = False
 
-        #These are flags for if a person has interacted completely through
-        #the interaction with a character, whether they went through the
-        #positive route or not
-        Jihyeon_Part_One = False
-        Manisha_Part_One = False
-        Cheng_Hau_Part_One = False
-        Pao_Part_One = False
-        Edwin_Part_One = False
-        Ysabel_Part_One = False
-        Huanvy_Part_One = False
-
-        #These are for introductions of people who haven't been introduced
-        #yet
-        Jihyeon_Introduction_Dialogue = False
-        Manisha_Introduction_Dialogue = False
-        Pao_Introduction_Dialogue = False
-        Ysabel_Introduction_Dialogue = False
 
     #This label first_night has the menu for the options of where to go
     label first_night:
@@ -119,7 +146,6 @@ label start:
             with dissolve
             n "You check out the room that the singing is coming from"
             scene jihyeon_room
-            with dissolve
             show jihyeon
             with dissolve
             #This is vital to ensuring that a person introduces only 1 time
@@ -157,7 +183,6 @@ label start:
                 with dissolve
                 n "You watch music videos for 2 hours, laughing, giggling, and having fun."
                 scene jihyeon_room
-                with dissolve
                 show jihyeon
                 with dissolve
                 j "Hey this was really fun. We should do this again sometime."
@@ -185,7 +210,6 @@ label start:
             with dissolve
             n "You go to the room that the music is playing from."
             scene manisha_room
-            with dissolve
             show manisha
             with dissolve
             if Manisha_Introduction_Dialogue == False:
@@ -221,7 +245,6 @@ label start:
                 with dissolve
                 n "*Manisha shows you some steps and you two dance together*"
                 scene manisha_room
-                with dissolve
                 show manisha
                 with dissolve
                 y "Wow that was really fun."
@@ -296,7 +319,6 @@ label start:
                 with dissolve
                 n "You and Huanvy put up posters for a while."
                 scene courtyard_1
-                with dissolve
                 show huanvy
                 with dissolve
                 h "Wow thank you so much."
@@ -317,54 +339,75 @@ label start:
                 jump first_night
 
         label .Ysabel_first_night:
+            n "You check out the hip-hop music and wiggling."
             scene courtyard_2
+            show ysabel
             with dissolve
-            show Ysabel
-            with dissolve
+            if Ysabel_Introduction_Dialogue == False:
+                ys "Wassupp I'm Ysabel Ojoylan and I use she/her pronouns"
+                y "Hi I'm [name] and I use [pronouns] pronouns."
+                ys "*Keeps dancing*"
+                $ Ysabel_Introduction_Dialogue = True
+            menu:
+                "Oh wow you're a good dancer":
+                    y "Oh wow you're a good dancer."
+                    jump .good_dancer
+                "I'm going to keep walking":
+                    jump first_night
+            label .good_dancer:
+                ys "Thanks. I've been dancing for two years.
+                        I'm in Kayu, CO, XTRM, and FFS."
+                y "Oh that's super cool."
+                ys "Hey do you want to learn how to body roll?"
+                menu:
+                    "Sure":
+                        y "Sure."
+                        jump .body_roll
+                    "No thanks":
+                        y "No thanks."
+                        jump .no_body_roll
+            label .body_roll:
+                ys "Awesome."
+                y "Alright, what should I do?"
+                ys "Alright, so move your head, then chest, then stomach, then hips, then legs.
+                    Like this."
+                y "Wow that's super complicated."
+                ys "It's not that bad. Give it a try."
+                y "Ok yeah."
+                n "You try a body roll and fail."
+                ys "*giggles* alright let's work on it some more."
+                scene black
+                with dissolve
+                n "You work on your body rolls with Ysabel."
+                ys "Hey you got it!"
+                y "Oh wow."
+                scene courtyard_2
+                show ysabel
+                with dissolve
+                ys "Hey you've made some good progress. You should go to
+                    a dance workshop with me sometime."
+                y "Yeah that was fun, and I think I will."
+                $ Ysabel_Progress_One = True
+                jump first_night
+            label .no_body_roll:
+                ys "Oh alright. Well I have to keep practicing."
+                y "Alright. I'll see you later I guess."
+                jump first_night
+
         label .Bed_first_night:
             scene room
             with dissolve
             n "You decide to go to bed."
-            show josh
-            with dissolve
-            jp "Oh yeah you must be [name]. I'm Josh, you roommate, and I use he/him pronouns. It's nice to meet you."
-            y "Oh hello Josh, it's nice to meet you."
-            y "(There must be a mix-up.... He's too handsome to be my roommate.)"
-            jp "Hey it's cool that I lofted your bed right?"
-            y "(Why am I not even mad at him?)"
-            menu:
-                "I like it":
-                    y "Oh actually I really like this set up. Nice couch, nice coffee table, nice rug."
-                    jp "Yeah thanks, I got it all for free actually. Nice right?"
-                "It's okay":
-                    y "It'll be a struggle for me to get up to bed... but I'll manage."
-                    jp "Oh, sorry...."
-            jp "Well are you going to go to sleep soon? I'm thinking about hosting something in here"
-            y "Oh what are you doing?"
-            jp "I'm having my event \"Tea with JP.\" I got a tea kettle, snacks, music, etc. and I want to have people hang out here"
-            menu:
-                "Sure":
-                    y "Yeah I'd be pretty cool with that."
-                    jump .sure
-                "No thanks":
-                    y "No thanks."
-                    jump .no
-            label .sure:
-                jp "Alright awesome."
-                y "I hope a lot of people attend your event!"
-                jp "Yeah, I hope so too."
-                jump part_two_intro
-            label .no:
-                jp "Oh, alright."
-                y "Good night."
-                jp "Night."
-                jump part_two_intro
+            jump part_two_intro
 
 label part_two_intro:
-    scene fall leaves
+    scene black
+    with dissolve
     n "NSO ended so soon. Then classes started immediately."
     n "You get caught up in classes and activities and applications and oh my."
     n "Time flies so quickly."
+    scene fall leaves
+    with dissolve
     n "It is Week 8 of Autumn Quarter."
     n "You're deep in the trench of midterms and papers. When will it end?"
     n "You decide you need to get out of your room and go somewhere."
@@ -383,36 +426,11 @@ label part_two:
         "West Campus":
             jump .west
 
-    python:
-        #Successful interaction
-        Jihyeon_Progress_Two = False
-        Manisha_Progress_Two = False
-        Cheng_Hau_Progress_Two = False
-        Pao_Progress_Two = False
-        Edwin_Progress_Two = False
-        Ysabel_Progress_Two = False
-        Huanvy_Progress_Two = False
-        #Any interaction
-        Jihyeon_Part_Two = False
-        Manisha_Part_Two = False
-        Cheng_Hau_Part_Two = False
-        Pao_Part_Two = False
-        Edwin_Part_Two = False
-        Ysabel_Part_Two = False
-        Huanvy_Part_Two = False
-        #Intro to interaction
-        Huanvy_Part_Two_Intro = False
-        Edwin_Part_Two_Intro = False
-        Manisha_Part_Two_Intro = False
-        Jihyeon_Part_Two_Intro = False
-        Ysabel_Part_Two_Intro = False
-        Pao_Part_Two_Intro = False
-        Cheng_Hau_Part_Two_Intro = False
-
     #Pao, Cheng Hau, and Manisha
     label .east_okada:
         $ Visit_East_Okada = True
         scene okada outside
+        with dissolve
         menu:
             "You see someone coming back with art supplies" if Pao_Progress_One == True:
                 jump .Pao_Part_Two
@@ -427,6 +445,7 @@ label part_two:
     label .west:
         $ Visit_West = True
         scene west campus
+        with dissolve
         menu:
             "You see someone wiggling towards Roble Gym" if Ysabel_Progress_One == True:
                 jump .Ysabel_Part_Two
@@ -439,6 +458,7 @@ label part_two:
     label .central:
         $ Visit_Central = True
         scene central campus
+        with dissolve
         menu:
             "You see someone with Pidgeotto hair walking down campus drive" if Huanvy_Progress_One == True:
                 jump .Huanvy_Part_Two
@@ -448,7 +468,7 @@ label part_two:
                 jump part_two
 
     label .Huanvy_Part_Two:
-        if Huanvy_Interaction_Closed == False:
+        if Huanvy_Part_Two_Intro== False:
             scene palm drive
             show huanvy
             with dissolve
@@ -466,25 +486,27 @@ label part_two:
                     jump .yes
                 "No thanks":
                     jump part_two
-            h "Oh hey did you change your mind and want to go?"
-            menu:
-                "I'd like to go":
-                    jump .yes
-                "It's still a no":
-                    jump Part_Two
+        h "Oh hey did you change your mind and want to go?"
+        menu:
+            "I'd like to go":
+                jump .yes
+            "It's still a no":
+                jump part_two
 
         label .yes:
+            $ Huanvy_Part_Two = True
             y "Yes."
             h "Cool, but wait don’t you have a paper or something?"
             y "Yeah… but I’d rather write this memory with you than that paper."
             scene black
+            with dissolve
             n "You and Huanvy ride the Caltrain and get to the venue."
             scene rave
             show huanvy
             with dissolve
             y "Wow this is super cool"
             n "The EDM is shaking your body. You see people going wild including many
-                ABGs and AFBs."
+                    ABGs and AFBs."
             n "*You feel uncomfortable from the sweat in the air and intoxicated people.
                 Your only source of comfort is in Huanvy."
             h "Yoooo this is LIT!!!!!"
@@ -502,7 +524,9 @@ label part_two:
             n "*You spend the rest of the night watching Huanvy go wild as you try to
             navigate the chaos of the rave"
             scene black
-            y "*After the rave ends you and Huanvy ride the Caltrain back. You weren’t comfortable at the rave, but it was an experience."
+            with dissolve
+            y "*After the rave ends you and Huanvy ride the Caltrain back.
+                You weren’t comfortable at the rave, but it was an experience."
         label .uncomfortable:
             y "Actually… I feel uncomfortable"
             h "Thanks [name] for being honest. Hey let’s go elsewhere. I know a good
@@ -517,7 +541,7 @@ label part_two:
             menu:
                 "Huanvy looks nice with the lights of the city softly glowing on their face. Your heart is beating faster"
                 "I have something to tell you":
-                    jump .tell_you
+                    jump .tell_you_Huanvy
                 "Don’t say anything":
                     jump .dont_say
         label .dont_say:
@@ -541,15 +565,22 @@ label part_two:
                 y "Yeah..."
                 y "Hey, can we hold hands?"
                 h "Yeah, I’d like that."
+                scene black
+                with dissolve
                 n "You two hold hands for a while, admiring the view."
                 h "Are you ready to go back?"
                 y "Yeah"
+                $ Huanvy_Part_Two_Progress = True
+                jump part_two
         label .lets_go_back:
             y "Yeah let’s go back."
             n "*You and Huanvy take a ride-sharing service.*"
             n "*You and Huanvy are sitting in the back together.*"
+            scene black
+            with dissolve
             n "*You can’t help but feel that in the foot of distance between you and
             Huanvy that there exists an infinite distance of longing*"
+            jump part_two
 
     label .Edwin_Part_Two:
         if Edwin_Part_Two_Intro == False:
@@ -619,14 +650,14 @@ label part_two:
             y "How about we go by ourselves?"
             d "*Edwin smirks at you* I like that idea too actually."
             n "*Edwin gets his car and you all drive to an off-campus coffee shop. It’s
-                very packed and the "
+                very packed and the line is long."
             y "Oh this shop is cute."
             d "Yeah it’s my favorite one."
             d "Here let’s go wait in line."
             n "*You two wait in line for a bit. You get to the front and the barista asks
                 for your order.*"
             $ coffee_order = renpy.input("What do you want to order?")
-            y "I’ll have [coffee_order]."
+            y "I’ll have an [coffee_order]."
             define b = ("Barista")
             b "That’ll be $4.95."
             y "Ok here. *Searches for wallet.*"
@@ -807,7 +838,6 @@ label part_two:
             scene white
             with dissolve
             scene manisha_room
-            with dissolve
             show manisha
             with dissolve
             m "Hey wake up. Wake up."
@@ -855,7 +885,6 @@ label part_two:
             y "I need some help getting to my room."
             m "Yeah sure thing."
             scene room
-            with dissolve
             show manisha
             with dissolve
             n "Manisha helps you down to your room."
@@ -888,6 +917,267 @@ label part_two:
                 m "Good night."
                 $ Manisha_Progress_Two = True
                 jump part_two
+                n “You go towards them, and you see that it’s Jihyeon”
+y “Jihyeon! What are you up to?”
+j “Oh hey [name]! I was just going to where people go to die”
+y “Oh gosh, thats terrible”
+j “I’m kidding, I’m going to Gates to work on my CS assignment. Do you want to join me?”
+menu:
+“Yes! I’d love to”:
+	jump .yes
+“NO I’m afraid of dead people”:
+	jump .part_two
+label .yes
+	y “Yes! I’d love to”:
+	j “Alright cool. Let’s go!”
+	n “You two go down to the basement of Gates. You can feel despair around
+		you. But there’s one ray of sunshine. Jihyeon smiles and it lights up the
+whole room.”
+y “Wow this does feel like death.”
+j “*doesn’t respond*”
+y “Jihyeon?”
+n “Jihyeon is too busy working. Her eyes are glued to her computer screen, and yours are glued to hers.”
+y “Well, I should probably start working.”
+n “You get deep into work on a pset. But then one problems gets to you. You can’t solve it.”
+n “You start to feel the life being drained out of you.”
+j “[name], are you ok?”
+y “...”
+j “[name]? [name]???”
+j “Hey let’s get you out of Gates. This environment isn’t doing you any good.”
+n “Jihyeon helps carry you and your stuff out. You go to the Forbes Cafe.”
+j “[name]?”
+y “Yeah?”
+j “Ok, it seems like Gates sucked your soul out.”
+y “Yeah, I guess so.”
+j “Hey I ordered you some laksa. Eat up.”
+y “Yeah ok thank you.”
+n “You try to lift up the spoon to your mouth, but it falls out. You’re still weak from being drained by Gates.”
+	j “Oh my gosh let me help you.”
+	menu:
+		“If you could”:
+			jump .feed_you
+		“I can feed myself”
+			jump .feed_myself
+	label .feed_you
+		y “If you could, that’d be amazing. I’m sorry to put you in this odd position
+			though….”
+		j “Oh no don’t be sorry. I shouldn’t have taken you into Gates.”
+		y “Yeah, I probably shouldn’t have gone in. But I wanted to hang out with
+			you.”
+		j “Aww that’s sweet, [name]. Now here, open your mouth.”
+		y “Ahhhhhh”
+		j “Here comes the plane! Yum!”
+		y “*giggle*”
+		j “*giggle*”
+		n “You feel your soul coming back into you. Is it because the laksa is
+			filling your body, or is it because Jihyeon is feeding your soul?”
+		y “Alright that’s the last bite of food.”
+		j “Wow thank you. I feel much better.”
+		y “Alright let’s get you back to Okada.”
+		j “Alright”
+		n “You and Jihyeon head back to your room in Okada.”
+		j “Alright, will you be ok? I have to go do some work still.”
+		n “You look into Jihyeon’s eyes and feel the warmth of the sun. You can’t
+			look away.”
+		j “Oh no you’re turning into a CS zombie again.”
+		menu:
+			“I have something to tell you”:
+				jump .tell_you_Jihyeon
+			“Yeah I need some rest”:
+				jump .rest
+	label .rest:
+		y “Yeah I think I need some rest.”
+		j “Well okay. If you need something, I think Ysabel and Scarlett are
+somewhere or you can call me. I gotta go.”
+y “Yeah ok, thank you. Good bye”
+j “Good bye”
+		n “You take a nap. In this nap, you have a dream about Jihyeon feeding
+			you, and you feeding Jihyeon back. You wake up.”
+		menu:
+			“Call Jihyeon”:
+				jump .tell_you_Jihyeon
+			“Go back to sleep”:
+				jump .part_two
+label .tell_you_Jihyeon:
+	y “Jihyeon, I have to tell you something.”
+	j “Yes what’s up?”
+	y “I…”
+	n “You pass out.”
+	j “[name]? [name???]
+	y “Oh what happened?”
+	j “You’re still weak it seems.”
+	y “Yeah I guess.”
+	j “What did you want to tell me?”
+	y “Oh right. I… like you.”
+	j “[name]...”
+	y “Yeah I know. It’s just that when I’m with you, I feel like a missing part
+		of me is whole. You fill me with your kind eyes and your shining
+		smile.”
+	j “[name]... I like you too.”
+	j “But you know we can’t be together.”
+	y “Yeah, I know.”
+	j “...”
+	y “What’s up?”
+	j “How about I work in your room? Then I can make sure you don’t pass
+		out again.”
+	y “Yeah, I’d like that.”
+	j “*blushes* ok.”
+	n “Jihyeon gets her work out. This time, she’s not as focused on her work
+		as she is on you.”
+	j “[name] you seem pretty tired. How about you lean on me?”
+	y “Yeah that’d be nice.”
+	n “Hours pass by and it’s now night.”
+	j “Hey [name] I have to go to bed now. It was nice sitting with you.”
+	y “It was nice sitting with you too. I feel like what Gates drained out of me,
+		you refilled.”
+	j “Good night.”
+	y “Good night.”
+Ysabel
+n “You could tell it was Ysabel, but getting closer allowed you to confirm.”
+y “Ysabel! What’s up?”
+ys “Wazzup [name]! What are you up to?”
+y “Oh nothing much. What about you?”
+ys “I’m going to a CO workshop. Hey do you want to join?”
+menu:
+	“Yes”
+		jump .yes
+	“No thanks”
+		y “No thanks”
+		jump part_two
+label .yes
+y “Yes I’d love to!”
+ys “Alright cool. We should run it’s getting started soon actually.”
+n “You run in and the floor is packed with the 50 other members of CO”
+y “Oh hey is that Michael Chang?”
+define mc = (“Michael Chang”)
+mc “Oh what’s up [name]?”
+y “Oh nothing much Ysabel invited me to the workshop.”
+mc “Oh cool. Hey it’s pretty packed but there’s some space over there we
+	can use.”
+menu:
+	“Yeah sure”
+		jump .michael_chang
+	“Actually I should find Ysabel
+		jump .find_ysabel
+label .michael_chang
+	y “Yeah sure.”
+	mc “Alright cool.”
+	n “You and Michael go to the space and then the workshop begins.”
+	y “Wow this is pretty complicated. Michael how are you so good at this?”
+	mc “Oh I’m not that good.”
+	n “The workshop ends. You’re sweaty but feel accomplished.”
+	mc “You want to walk back to Okada together?”
+	y “Yeah sure”
+	ys “[name]! I’ve been looking all over for you. Where’d you go?”
+	y “I saw Michael and I went to dance with him.”
+	ys “Oh yeah alright.”
+	y “Are you heading back to Okada? Let’s walk together.”
+	ys “Actually I have to go to Kayu practice and then Fullout Funk Squad.”
+	y “Oh alright.”
+	ys “But I’ll catch you later.”
+	y “See ya.”
+label .find_ysabel:
+	y “Actually I should find Ysabel. She invited me to come.”
+	mc “Alright I’ll catch you later.”
+	n “You go looking for Ysabel. She’s nowhere to be found though.”
+	ys “[name]!”
+	n “You turn around and see Ysabel.”
+	y “Oh Ysabel, I was looking for you.”
+	ys “Yeah where did you go? I thought you were following me.”
+	y “Oh I saw Michael Chang so I said hi, and then I lost you.”
+	ys “Oh alright. I found some space over there, let’s go.”
+	y “Alright cool.”
+	n “You two make it over and then the workshop starts.”
+	y “Wow this is pretty complicated. Ysabel how are you so good at this?”
+	ys “Oh I’m just in a perpetual state of wiggling.”
+	n “The workshop ends. You feel sweaty but accomplished.”
+	y “Wow that was a lot. Are you going to head back to Okada now?”
+	ys “Actually I have Kayu practice. Hey do you want to go to that too?”
+	menu:
+		“Yes”
+			jump .kayu
+		“No”
+			jump .no
+label .no:
+	y “No thanks, I should probably head back and get some work done.”
+	ys “Yeah you should definitely take care of that. Well I’ll catch you around.”
+	y “Yeah I’ll see you Ysabel.”
+	ys “I’ll see you [name].”
+label .kayu
+	y “Yeah sure.”
+	ys “Awesome! Hurry let’s run to the A3C”
+	n “You and Ysabel run over to the A3C. But running was a mistake. You trip
+		and fall and twist your ankle.”
+	y “OWW!!!”
+	ys “Oh my gosh are you ok?”
+	y “I think I twisted my ankle.”
+	ys Oh my gosh. Let’s get you back to Okada.”
+	menu:
+		“No I can call a 5sure”:
+			jump .fivesure
+		“Please”:
+			jump .please
+label .fivesure
+	y “No I can call a 5sure. You should head to Kayu. You’re a co-chair and
+		Breaking Ground is soon.”
+	ys “Are you sure? You look like you’re in pain.”
+	y “I’m sure.”
+	ys “Ok. Let me wait with you at least.”
+	n “You and Ysabel wait for the 5sure to come. It comes and she sees
+		you off.”
+	ys “I’ll see you [name].”
+	y “I’ll see you Ysabel.”
+label .please
+	y “Please.”
+	ys “Yeah I got you. Here, swing your shoulder over me.”
+	y “Alright yeah.”
+	n “You’re in so much pain as you limp back to Okada, but the fact that
+		you’re half-hugging Ysabel makes it better.”
+	ys “Alright here you are.”
+	y “Thank you so much.”
+	ys “I’m going to ask Scarlett for an ice pack for you.”
+	y “Ok thank you.”
+	n “Ysabel goes downstairs and gets an icepack.”
+	ys “Here you go.”
+	y “Thank you so much.”
+	ys “Alright. I’m gonna wait here with you for half an hour and see
+		how badly your ankle swells.”
+	y “Shouldn’t you go back to the A3C?”
+	ys “No my co-chair will be able to handle it today. I need to take care of
+		you.”
+	n “You feel the pain go away as she says that and smiles. How does she dance
+		in Kayu, CO, and FFS and also be such a caring RA?”
+	ys “Okay let’s check the swelling now. Hmm, it doesn’t look too bad. How bad
+		does it hurt?”
+	y “Not too bad. But I do feel bad for making you miss Kayu.”
+	ys “No don’t worry about it. Everything will work out.”
+	y “Yeah. It’s just…”
+	ys “Rest, okay? Is there anything else you want me to get you?”
+	menu:
+		“Actually… I have something to tell you.”
+			jump .tell_you_Ysabel
+		“I’ll be good.”
+			jump .be_good
+label .tell_you_Ysabel:
+	y “Actually, I have something to tell you.”
+	ys “Yeah what is it?”
+	y “I like you.”
+	ys “Oh my gosh, [name].”
+	y “Yeah, that’s why I went to the CO workshop and why I wanted to
+		go to Kayu.”
+	ys “[name]...”
+	y “Yeah I know, but it’s just foolish.”
+	ys “[name], I like you too. But I’m also your RA and I have a boyfriend.”
+	y “Yeah I know.”
+	y “Hey, I think I’ll be able to take care of myself. You should at least
+		get some rest yourself.”
+	ys “Are you sure?”
+	y “Yeah.”
+	ys “Alright. Have a good night.”
+	n “You can’t help but feel a dull pain in your body, and it isn’t in your ankle.
+		It’s in your heart. Why’d someone so wonderful and right come into
+your life at the wrong time?
+
 
 label part_three:
     if Jihyeon_Progress_Two == True:
@@ -1092,4 +1382,178 @@ label part_three:
                 scene black
                 n "UwUkada. Fin"
                 return
+    label .Ysabel_Part_Three:
+        y "I have to find Ysabel."
+        n "You go looking around for Ysabel. Her room, the gym, the a3c, the nursery, Jordan Hall, and even her boyfriend’s dorm."
+        n "She’s nowhere to be found, so you go to your room and give up."
+        n "You hear a knock on your door. *knock knock*"
+        n "You open the door."
+        y "Ysabel!"
+        ys "[name]."
+        y "How are you?"
+        ys "I’m ok. How are you?"
+        y "I’ve been good. I’ve been…"
+        menu:
+            "I’ve been…"
+            "Thinking about you":
+                y "I’ve been thinking about you."
+                $ Ysabel_Response = "I’ve been thinking about you too."
+            "Missing you":
+                y "I’ve been missing you."
+                $ Ysabel_Response = "I’ve been missing you too."
+            "Needing you":
+                y "I’ve been needing you."
+                $ Ysabel_Response = "I’ve been needing you too."
+            "Trying to forget you":
+                y "I’ve been trying to forget you."
+                jump .bad_ending_ysabel
+        ys "[name], [Ysabel_Response], but…"
+        y "Right… your boyfriend…"
+        ys "Yeah, and also I’m your RA. It just wouldn’t be right."
+        y "It wouldn’t."
+        ys "But [name], I’ve never felt this way before about anyone else."
+        menu:
+            "But your boyfriend":
+                y "But your boyfriend."
+            "You make my heart beat…":
+                y "Ysabel, you make my heart beat a thousand miles a
+                minute."
+                ys "I feel so strongly about you, but I just can’t."
+                jump .bad_ending_ysabel
+        ys "Well I have some news."
+        y "Yeah?"
+        ys "Over the break, I broke up with my boyfriend."
+        y "Oh I’m so sorry."
+        ys "No don’t be. I broke up with him because I wanted to be with you."
+        y "...*a pained smile draws on your face*..."
+        ys "...*a pained smile draws on her face*..."
+        y "Ysabel."
+        ys "[name]."
+        y "..."
+        ys "Will you go out with me?"
+        menu:
+            "Yes":
+                jump .yes
+            "I can’t":
+                y "I can't."
+                jump .bad_ending_ysabel
+        label .bad_ending_ysabel:
+            ys "..."
+            y "..."
+            scene black with dissolve
+            n "UwUkada. Fin."
+            return
+        label .yes:
+            y "Yes."
+            ys "Great *smiles*"
+            y "Where do you want to go?"
+            ys "Let’s go to get ramen."
+            y "Wow that sounds yummy."
+            ys "I know just the place."
+            n "You and Ysabel go to a nearby ramen place."
+            y "Wow the line is long."
+            ys "It’s, because that means there’s more time to stand next to you."
+            menu:
+                "Can I hold your hand?":
+                    y "Can I hold your hand?"
+                    $hand_hug = hand
+                "Can I hug you?":
+                    y "Can I hug you?"
+                    $hand_hug = hug
+            ys "I’d like that."
+            n "You [hand_hug] Ysabel."
+            y "That was nice."
+            ys "Yeah that was."
+            ys "Oh wow we’re so close to the front."
+            define w = ("Waiter")
+            w "Hello, how many?"
+            y "Two, please."
+            n "You two are lead by the waiter to a table."
+            ys "Oh wow this looks so delicious."
+            y "What do you think you’re going to order?"
+            ys "Hmm… I think I want some of… you. How’s that sound?"
+            menu:
+                "Oh wow":
+                    y "Oh wow."
+                "I want some of you":
+                    y "I want some of you."
+            ys "*blushes*"
+            w "What would you like to order?"
+            ys "I’ll have the tonkotsu ramen."
+            menu:
+                "I’ll have some of her":
+                    y "I’ll have some of her."
+                    ys "*blushes* stop that *giggles*"
+                "I’ll also have tonkotsu ramen":
+                    y "I’ll also have some tonkotsu ramen."
+
+            w "Alright… your orders will come out shortly."
+            ys "Oooo I can’t wait."
+            y "Me neither."
+            w "Alright here are your orders."
+            ys "Thank you!!!"
+            y "Thanks!"
+            scene black
+            with dissolve
+            n "You two enjoy your ramen. After that, you go back to Ysabel’s
+                room."
+            scene ysabel room
+            show ysabel
+            with dissolve
+            y "I’m so full."
+            ys "Same."
+            y "It’s nice hanging out with you."
+            ys "Yeah. Hey I was thinking. Do you want to slow dance?"
+            menu:
+                "Yes":
+                    y "Yes."
+                    jump .slow_dance
+                "No":
+                    y "No."
+                    jump .no_ysabel
+        label .no_ysabel:
+            ys "Oh, alright."
+            n "You two sit and just enjoy each other’s presence for the night."
+            scene black
+            with dissolve
+            n "UwUkada. Fin."
+            return
+        label .slow_dance:
+            ys "Alright. Let me dim these lights and turn some music on."
+            n "Ysabel dims the lights and turns some music on, and you two
+                start to slow dance."
+            y "This is nice."
+            ys "Yeah, this is."
+            menu:
+                "Ysabel looks so nice with the soft lights glowing on her
+                face."
+                "Can I kiss you?":
+                    y "Can I kiss you?"
+                    ys "Yeah, I’d like that."
+                    n "You two kiss."
+                "*Just look into her eyes*":
+                    n "You look deeply into her eyes. She looks deeply
+                        into yours."
+            ys "Hey, I think I want to do something more with you."
+            menu:
+                "I’d like to do something more too":
+                    y "I’d like to do something more too."
+                    jump .something_more
+                "I don’t think I should do that.":
+                    y "I don’t think I should do that."
+                    y "I still don’t think we can be anything."
+                    ys "You’re right."
+                    jump .ysabel_bad_ending
+        label .something_more:
+            ys "Ok, I want to yike on you… in bed."
+            y "I’m into that."
+            ys "Are you ready?"
+            y "Yeah, are you?"
+            ys "Yeah, I am."
+            scene black
+            with dissolve
+            n "You two enjoy each other’s company for the night."
+            ys "Hey, I love you."
+            y "I love you too."
+            n "UwUkada. Fin."
             return

@@ -2,33 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 893: end of line expected.
-    n "Over the break you couldn't stop thinking about Jihyeon." if Jihyeon_Progress_Two == True
-                                                                 ^
-
-File "game/script.rpy", line 894: end of line expected.
-    n "Over the break you couldn't stop thinking about Manisha."if Manisha_Progress_Two == True
-                                                                ^
-
-File "game/script.rpy", line 895: end of line expected.
-    n "Over the break you couldn't stop thinking about Cheng-Hau."if Cheng_Hau_Progress_Two == True
-                                                                  ^
-
-File "game/script.rpy", line 896: end of line expected.
-    n "Over the break you couldn't stop thinking about Pao."if Pao_Progress_Two == True
-                                                            ^
-
-File "game/script.rpy", line 897: end of line expected.
-    n "Over the break you couldn't stop thinking about Edwin."if Edwin_Progress_Two == True
-                                                              ^
-
-File "game/script.rpy", line 898: end of line expected.
-    n "Over the break you couldn't stop thinking about Ysabel."if Ysabel_Progress_Two == True
-                                                               ^
-
-File "game/script.rpy", line 899: end of line expected.
-    n "Over the break you couldn't stop thinking about Huanvy."if Huanvy_Progress_Two == True
-                                                               ^
+File "game/script.rpy", line 927: Tab characters are not allowed in Ren'Py scripts.
 
 Ren'Py Version: Ren'Py 7.1.3.1092
-Tue Dec  4 17:31:28 2018
+Thu Dec  6 15:10:34 2018
