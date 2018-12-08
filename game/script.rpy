@@ -13,6 +13,7 @@ define p = Character("Pao", who_color="#5cd65c")#green
 define h = Character("Huanvy", who_color="#1ad1ff")#blue
 define d = Character("Edwin", who_color="#df80ff")#purple
 define ys = Character("Ysabel", who_color="#ff9933")#orange
+define b = ("Barista")
 
 init python:
     #Progress_One is for if the player has successfully interacted.
@@ -468,10 +469,10 @@ label part_two:
                 jump part_two
 
     label .Huanvy_Part_Two:
+        scene palm drive
+        show huanvy
+        with dissolve
         if Huanvy_Part_Two_Intro== False:
-            scene palm drive
-            show huanvy
-            with dissolve
             $ Huanvy_Part_Two_Intro = True
             n "You’d recognize that hair anywhere. It’s Huanvy."
             y "Oh hey Huanvy, where are you heading to?"
@@ -483,7 +484,7 @@ label part_two:
             h "I have an extra ticket. Do you want to go?"
             menu:
                 "Yes":
-                    jump .yes
+                    jump .yes_huanvy
                 "No thanks":
                     jump part_two
         h "Oh hey did you change your mind and want to go?"
@@ -493,7 +494,7 @@ label part_two:
             "It's still a no":
                 jump part_two
 
-        label .yes:
+        label .yes_huanvy:
             $ Huanvy_Part_Two = True
             y "Yes."
             h "Cool, but wait don’t you have a paper or something?"
@@ -658,7 +659,6 @@ label part_two:
                 for your order.*"
             $ coffee_order = renpy.input("What do you want to order?")
             y "I’ll have an [coffee_order]."
-            define b = ("Barista")
             b "That’ll be $4.95."
             y "Ok here. *Searches for wallet.*"
             y "Oh sorry it looks like I don’t have my wallet. Can you cancel my order?"
@@ -917,266 +917,268 @@ label part_two:
                 m "Good night."
                 $ Manisha_Progress_Two = True
                 jump part_two
-                n “You go towards them, and you see that it’s Jihyeon”
-y “Jihyeon! What are you up to?”
-j “Oh hey [name]! I was just going to where people go to die”
-y “Oh gosh, thats terrible”
-j “I’m kidding, I’m going to Gates to work on my CS assignment. Do you want to join me?”
-menu:
-“Yes! I’d love to”:
-	jump .yes
-“NO I’m afraid of dead people”:
-	jump .part_two
-label .yes
-	y “Yes! I’d love to”:
-	j “Alright cool. Let’s go!”
-	n “You two go down to the basement of Gates. You can feel despair around
-		you. But there’s one ray of sunshine. Jihyeon smiles and it lights up the
-whole room.”
-y “Wow this does feel like death.”
-j “*doesn’t respond*”
-y “Jihyeon?”
-n “Jihyeon is too busy working. Her eyes are glued to her computer screen, and yours are glued to hers.”
-y “Well, I should probably start working.”
-n “You get deep into work on a pset. But then one problems gets to you. You can’t solve it.”
-n “You start to feel the life being drained out of you.”
-j “[name], are you ok?”
-y “...”
-j “[name]? [name]???”
-j “Hey let’s get you out of Gates. This environment isn’t doing you any good.”
-n “Jihyeon helps carry you and your stuff out. You go to the Forbes Cafe.”
-j “[name]?”
-y “Yeah?”
-j “Ok, it seems like Gates sucked your soul out.”
-y “Yeah, I guess so.”
-j “Hey I ordered you some laksa. Eat up.”
-y “Yeah ok thank you.”
-n “You try to lift up the spoon to your mouth, but it falls out. You’re still weak from being drained by Gates.”
-	j “Oh my gosh let me help you.”
-	menu:
-		“If you could”:
-			jump .feed_you
-		“I can feed myself”
-			jump .feed_myself
-	label .feed_you
-		y “If you could, that’d be amazing. I’m sorry to put you in this odd position
-			though….”
-		j “Oh no don’t be sorry. I shouldn’t have taken you into Gates.”
-		y “Yeah, I probably shouldn’t have gone in. But I wanted to hang out with
-			you.”
-		j “Aww that’s sweet, [name]. Now here, open your mouth.”
-		y “Ahhhhhh”
-		j “Here comes the plane! Yum!”
-		y “*giggle*”
-		j “*giggle*”
-		n “You feel your soul coming back into you. Is it because the laksa is
-			filling your body, or is it because Jihyeon is feeding your soul?”
-		y “Alright that’s the last bite of food.”
-		j “Wow thank you. I feel much better.”
-		y “Alright let’s get you back to Okada.”
-		j “Alright”
-		n “You and Jihyeon head back to your room in Okada.”
-		j “Alright, will you be ok? I have to go do some work still.”
-		n “You look into Jihyeon’s eyes and feel the warmth of the sun. You can’t
-			look away.”
-		j “Oh no you’re turning into a CS zombie again.”
-		menu:
-			“I have something to tell you”:
-				jump .tell_you_Jihyeon
-			“Yeah I need some rest”:
-				jump .rest
-	label .rest:
-		y “Yeah I think I need some rest.”
-		j “Well okay. If you need something, I think Ysabel and Scarlett are
-somewhere or you can call me. I gotta go.”
-y “Yeah ok, thank you. Good bye”
-j “Good bye”
-		n “You take a nap. In this nap, you have a dream about Jihyeon feeding
-			you, and you feeding Jihyeon back. You wake up.”
-		menu:
-			“Call Jihyeon”:
-				jump .tell_you_Jihyeon
-			“Go back to sleep”:
-				jump .part_two
-label .tell_you_Jihyeon:
-	y “Jihyeon, I have to tell you something.”
-	j “Yes what’s up?”
-	y “I…”
-	n “You pass out.”
-	j “[name]? [name???]
-	y “Oh what happened?”
-	j “You’re still weak it seems.”
-	y “Yeah I guess.”
-	j “What did you want to tell me?”
-	y “Oh right. I… like you.”
-	j “[name]...”
-	y “Yeah I know. It’s just that when I’m with you, I feel like a missing part
-		of me is whole. You fill me with your kind eyes and your shining
-		smile.”
-	j “[name]... I like you too.”
-	j “But you know we can’t be together.”
-	y “Yeah, I know.”
-	j “...”
-	y “What’s up?”
-	j “How about I work in your room? Then I can make sure you don’t pass
-		out again.”
-	y “Yeah, I’d like that.”
-	j “*blushes* ok.”
-	n “Jihyeon gets her work out. This time, she’s not as focused on her work
-		as she is on you.”
-	j “[name] you seem pretty tired. How about you lean on me?”
-	y “Yeah that’d be nice.”
-	n “Hours pass by and it’s now night.”
-	j “Hey [name] I have to go to bed now. It was nice sitting with you.”
-	y “It was nice sitting with you too. I feel like what Gates drained out of me,
-		you refilled.”
-	j “Good night.”
-	y “Good night.”
-Ysabel
-n “You could tell it was Ysabel, but getting closer allowed you to confirm.”
-y “Ysabel! What’s up?”
-ys “Wazzup [name]! What are you up to?”
-y “Oh nothing much. What about you?”
-ys “I’m going to a CO workshop. Hey do you want to join?”
-menu:
-	“Yes”
-		jump .yes
-	“No thanks”
-		y “No thanks”
-		jump part_two
-label .yes
-y “Yes I’d love to!”
-ys “Alright cool. We should run it’s getting started soon actually.”
-n “You run in and the floor is packed with the 50 other members of CO”
-y “Oh hey is that Michael Chang?”
-define mc = (“Michael Chang”)
-mc “Oh what’s up [name]?”
-y “Oh nothing much Ysabel invited me to the workshop.”
-mc “Oh cool. Hey it’s pretty packed but there’s some space over there we
-	can use.”
-menu:
-	“Yeah sure”
-		jump .michael_chang
-	“Actually I should find Ysabel
-		jump .find_ysabel
-label .michael_chang
-	y “Yeah sure.”
-	mc “Alright cool.”
-	n “You and Michael go to the space and then the workshop begins.”
-	y “Wow this is pretty complicated. Michael how are you so good at this?”
-	mc “Oh I’m not that good.”
-	n “The workshop ends. You’re sweaty but feel accomplished.”
-	mc “You want to walk back to Okada together?”
-	y “Yeah sure”
-	ys “[name]! I’ve been looking all over for you. Where’d you go?”
-	y “I saw Michael and I went to dance with him.”
-	ys “Oh yeah alright.”
-	y “Are you heading back to Okada? Let’s walk together.”
-	ys “Actually I have to go to Kayu practice and then Fullout Funk Squad.”
-	y “Oh alright.”
-	ys “But I’ll catch you later.”
-	y “See ya.”
-label .find_ysabel:
-	y “Actually I should find Ysabel. She invited me to come.”
-	mc “Alright I’ll catch you later.”
-	n “You go looking for Ysabel. She’s nowhere to be found though.”
-	ys “[name]!”
-	n “You turn around and see Ysabel.”
-	y “Oh Ysabel, I was looking for you.”
-	ys “Yeah where did you go? I thought you were following me.”
-	y “Oh I saw Michael Chang so I said hi, and then I lost you.”
-	ys “Oh alright. I found some space over there, let’s go.”
-	y “Alright cool.”
-	n “You two make it over and then the workshop starts.”
-	y “Wow this is pretty complicated. Ysabel how are you so good at this?”
-	ys “Oh I’m just in a perpetual state of wiggling.”
-	n “The workshop ends. You feel sweaty but accomplished.”
-	y “Wow that was a lot. Are you going to head back to Okada now?”
-	ys “Actually I have Kayu practice. Hey do you want to go to that too?”
-	menu:
-		“Yes”
-			jump .kayu
-		“No”
-			jump .no
-label .no:
-	y “No thanks, I should probably head back and get some work done.”
-	ys “Yeah you should definitely take care of that. Well I’ll catch you around.”
-	y “Yeah I’ll see you Ysabel.”
-	ys “I’ll see you [name].”
-label .kayu
-	y “Yeah sure.”
-	ys “Awesome! Hurry let’s run to the A3C”
-	n “You and Ysabel run over to the A3C. But running was a mistake. You trip
-		and fall and twist your ankle.”
-	y “OWW!!!”
-	ys “Oh my gosh are you ok?”
-	y “I think I twisted my ankle.”
-	ys Oh my gosh. Let’s get you back to Okada.”
-	menu:
-		“No I can call a 5sure”:
-			jump .fivesure
-		“Please”:
-			jump .please
-label .fivesure
-	y “No I can call a 5sure. You should head to Kayu. You’re a co-chair and
-		Breaking Ground is soon.”
-	ys “Are you sure? You look like you’re in pain.”
-	y “I’m sure.”
-	ys “Ok. Let me wait with you at least.”
-	n “You and Ysabel wait for the 5sure to come. It comes and she sees
-		you off.”
-	ys “I’ll see you [name].”
-	y “I’ll see you Ysabel.”
-label .please
-	y “Please.”
-	ys “Yeah I got you. Here, swing your shoulder over me.”
-	y “Alright yeah.”
-	n “You’re in so much pain as you limp back to Okada, but the fact that
-		you’re half-hugging Ysabel makes it better.”
-	ys “Alright here you are.”
-	y “Thank you so much.”
-	ys “I’m going to ask Scarlett for an ice pack for you.”
-	y “Ok thank you.”
-	n “Ysabel goes downstairs and gets an icepack.”
-	ys “Here you go.”
-	y “Thank you so much.”
-	ys “Alright. I’m gonna wait here with you for half an hour and see
-		how badly your ankle swells.”
-	y “Shouldn’t you go back to the A3C?”
-	ys “No my co-chair will be able to handle it today. I need to take care of
-		you.”
-	n “You feel the pain go away as she says that and smiles. How does she dance
-		in Kayu, CO, and FFS and also be such a caring RA?”
-	ys “Okay let’s check the swelling now. Hmm, it doesn’t look too bad. How bad
-		does it hurt?”
-	y “Not too bad. But I do feel bad for making you miss Kayu.”
-	ys “No don’t worry about it. Everything will work out.”
-	y “Yeah. It’s just…”
-	ys “Rest, okay? Is there anything else you want me to get you?”
-	menu:
-		“Actually… I have something to tell you.”
-			jump .tell_you_Ysabel
-		“I’ll be good.”
-			jump .be_good
-label .tell_you_Ysabel:
-	y “Actually, I have something to tell you.”
-	ys “Yeah what is it?”
-	y “I like you.”
-	ys “Oh my gosh, [name].”
-	y “Yeah, that’s why I went to the CO workshop and why I wanted to
-		go to Kayu.”
-	ys “[name]...”
-	y “Yeah I know, but it’s just foolish.”
-	ys “[name], I like you too. But I’m also your RA and I have a boyfriend.”
-	y “Yeah I know.”
-	y “Hey, I think I’ll be able to take care of myself. You should at least
-		get some rest yourself.”
-	ys “Are you sure?”
-	y “Yeah.”
-	ys “Alright. Have a good night.”
-	n “You can’t help but feel a dull pain in your body, and it isn’t in your ankle.
-		It’s in your heart. Why’d someone so wonderful and right come into
-your life at the wrong time?
+
+    label .Jihyeon_Part_Two:
+        n "You go towards them, and you see that it’s Jihyeon"
+        y "Jihyeon! What are you up to?"
+        j "Oh hey [name]! I was just going to where people go to die"
+        y "Oh gosh, thats terrible"
+        j "I’m kidding, I’m going to Gates to work on my CS assignment. Do you want to join me?"
+        menu:
+            "Yes! I’d love to":
+                    jump .yes_jihyeon
+            "NO I’m afraid of dead people":
+                    jump .part_two
+        label .yes_jihyeon:
+            y "Yes! I’d love to"
+            j "Alright cool. Let’s go!"
+            n "You two go down to the basement of Gates. You can feel despair around
+            you. But there’s one ray of sunshine. Jihyeon smiles and it lights up the
+            whole room."
+            y "Wow this does feel like death."
+            j "*doesn’t respond*"
+            y "Jihyeon?"
+            n "Jihyeon is too busy working. Her eyes are glued to her computer screen, and yours are glued to hers."
+            y "Well, I should probably start working."
+            n "You get deep into work on a pset. But then one problems gets to you. You can’t solve it."
+            n "You start to feel the life being drained out of you."
+            j "[name], are you ok?"
+            y "..."
+            j "[name]? [name]???"
+            j "Hey let’s get you out of Gates. This environment isn’t doing you any good."
+            n "Jihyeon helps carry you and your stuff out. You go to the Forbes Cafe."
+            j "[name]?"
+            y "Yeah?"
+            j "Ok, it seems like Gates sucked your soul out."
+            y "Yeah, I guess so."
+            j "Hey I ordered you some laksa. Eat up."
+            y "Yeah ok thank you."
+            n "You try to lift up the spoon to your mouth, but it falls out. You’re still weak from being drained by Gates."
+            j "Oh my gosh let me help you."
+            menu:
+                "If you could":
+                    jump .feed_you
+                "I can feed myself":
+                    jump .feed_myself
+        label .feed_you:
+            y "If you could, that’d be amazing. I’m sorry to put you in this odd position
+            though…."
+            j "Oh no don’t be sorry. I shouldn’t have taken you into Gates."
+            y "Yeah, I probably shouldn’t have gone in. But I wanted to hang out with
+            you."
+            j "Aww that’s sweet, [name]. Now here, open your mouth."
+            y "Ahhhhhh"
+            j "Here comes the plane! Yum!"
+            y "*giggle*"
+            j "*giggle*"
+            n "You feel your soul coming back into you. Is it because the laksa is
+            filling your body, or is it because Jihyeon is feeding your soul?"
+            y "Alright that’s the last bite of food."
+            j "Wow thank you. I feel much better."
+            y "Alright let’s get you back to Okada."
+            j "Alright"
+            n "You and Jihyeon head back to your room in Okada."
+            j "Alright, will you be ok? I have to go do some work still."
+            n "You look into Jihyeon’s eyes and feel the warmth of the sun. You can’t
+            look away."
+            j "Oh no you’re turning into a CS zombie again."
+            menu:
+                "I have something to tell you":
+                    jump .tell_you_Jihyeon
+                "Yeah I need some rest":
+                    jump .rest
+        label .rest:
+            y "Yeah I think I need some rest."
+            j "Well okay. If you need something, I think Ysabel and Scarlett are
+            somewhere or you can call me. I gotta go."
+            y "Yeah ok, thank you. Good bye"
+            j "Good bye"
+            n "You take a nap. In this nap, you have a dream about Jihyeon feeding
+            you, and you feeding Jihyeon back. You wake up."
+            menu:
+                "Call Jihyeon":
+                    jump .tell_you_Jihyeon
+                "Go back to sleep":
+                    jump .part_two
+        label .tell_you_Jihyeon:
+            y "Jihyeon, I have to tell you something."
+            j "Yes what’s up?"
+            y "I…"
+            n "You pass out."
+            j "[name]? [name]???"
+            y "Oh what happened?"
+            j "You’re still weak it seems."
+            y "Yeah I guess."
+            j "What did you want to tell me?"
+            y "Oh right. I… like you."
+            j "[name]..."
+            y "Yeah I know. It’s just that when I’m with you, I feel like a missing part
+            of me is whole. You fill me with your kind eyes and your shining
+            smile."
+            j "[name]... I like you too."
+            j "But you know we can’t be together."
+            y "Yeah, I know."
+            j "..."
+            y "What’s up?"
+            j "How about I work in your room? Then I can make sure you don’t pass
+            out again."
+            y "Yeah, I’d like that."
+            j "*blushes* ok."
+            n "Jihyeon gets her work out. This time, she’s not as focused on her work
+            as she is on you."
+            j "[name] you seem pretty tired. How about you lean on me?"
+            y "Yeah that’d be nice."
+            n "Hours pass by and it’s now night."
+            j "Hey [name] I have to go to bed now. It was nice sitting with you."
+            y "It was nice sitting with you too. I feel like what Gates drained out of me,
+            you refilled."
+            j "Good night."
+            y "Good night."
+    label .Ysabel_Part_Two:
+        n "You could tell it was Ysabel, but getting closer allowed you to confirm."
+        y "Ysabel! What’s up?"
+        ys "Wazzup [name]! What are you up to?"
+        y "Oh nothing much. What about you?"
+        ys "I’m going to a CO workshop. Hey do you want to join?"
+        menu:
+            "Yes":
+                jump .yes_ysabel
+            "No thanks":
+                y "No thanks"
+                jump part_two
+        label .yes_ysabel:
+            y "Yes I’d love to!"
+            ys "Alright cool. We should run it’s getting started soon actually."
+            n "You run in and the floor is packed with the 50 other members of CO"
+            y "Oh hey is that Michael Chang?"
+            define mc = ("Michael Chang")
+            mc "Oh what’s up [name]?"
+            y "Oh nothing much Ysabel invited me to the workshop."
+            mc "Oh cool. Hey it’s pretty packed but there’s some space over there we
+            can use."
+            menu:
+                "Yeah sure":
+                    jump .michael_chang
+                "Actually I should find Ysabel":
+                    jump .find_ysabel
+        label .michael_chang:
+            y "Yeah sure."
+            mc "Alright cool."
+            n "You and Michael go to the space and then the workshop begins."
+            y "Wow this is pretty complicated. Michael how are you so good at this?"
+            mc "Oh I’m not that good."
+            n "The workshop ends. You’re sweaty but feel accomplished."
+            mc "You want to walk back to Okada together?"
+            y "Yeah sure"
+            ys "[name]! I’ve been looking all over for you. Where’d you go?"
+            y "I saw Michael and I went to dance with him."
+            ys "Oh yeah alright."
+            y "Are you heading back to Okada? Let’s walk together."
+            ys "Actually I have to go to Kayu practice and then Fullout Funk Squad."
+            y "Oh alright."
+            ys "But I’ll catch you later."
+            y "See ya."
+        label .find_ysabel:
+        y "Actually I should find Ysabel. She invited me to come."
+        mc "Alright I’ll catch you later."
+        n "You go looking for Ysabel. She’s nowhere to be found though."
+        ys "[name]!"
+        n "You turn around and see Ysabel."
+        y "Oh Ysabel, I was looking for you."
+        ys "Yeah where did you go? I thought you were following me."
+        y "Oh I saw Michael Chang so I said hi, and then I lost you."
+        ys "Oh alright. I found some space over there, let’s go."
+        y "Alright cool."
+        n "You two make it over and then the workshop starts."
+        y "Wow this is pretty complicated. Ysabel how are you so good at this?"
+        ys "Oh I’m just in a perpetual state of wiggling."
+        n "The workshop ends. You feel sweaty but accomplished."
+        y "Wow that was a lot. Are you going to head back to Okada now?"
+        ys "Actually I have Kayu practice. Hey do you want to go to that too?"
+        menu:
+            "Yes":
+                jump .kayu
+            "No":
+                jump .no
+        label .no:
+            y "No thanks, I should probably head back and get some work done."
+            ys "Yeah you should definitely take care of that. Well I’ll catch you around."
+            y "Yeah I’ll see you Ysabel."
+            ys "I’ll see you [name]."
+        label .kayu:
+            y "Yeah sure."
+            ys "Awesome! Hurry let’s run to the A3C"
+            n "You and Ysabel run over to the A3C. But running was a mistake. You trip
+            and fall and twist your ankle."
+            y "OWW!!!"
+            ys "Oh my gosh are you ok?"
+            y "I think I twisted my ankle."
+            ys "Oh my gosh. Let’s get you back to Okada."
+            menu:
+                "No I can call a 5sure":
+                    jump .fivesure
+                "Please":
+                    jump .please
+        label .fivesure:
+            y "No I can call a 5sure. You should head to Kayu. You’re a co-chair and
+            Breaking Ground is soon."
+            ys "Are you sure? You look like you’re in pain."
+            y "I’m sure."
+            ys "Ok. Let me wait with you at least."
+            n "You and Ysabel wait for the 5sure to come. It comes and she sees
+            you off."
+            ys "I’ll see you [name]."
+            y "I’ll see you Ysabel."
+        label .please:
+            y "Please."
+            ys "Yeah I got you. Here, swing your shoulder over me."
+            y "Alright yeah."
+            n "You’re in so much pain as you limp back to Okada, but the fact that
+            you’re half-hugging Ysabel makes it better."
+            ys "Alright here you are."
+            y "Thank you so much."
+            ys "I’m going to ask Scarlett for an ice pack for you."
+            y "Ok thank you."
+            n "Ysabel goes downstairs and gets an icepack."
+            ys "Here you go."
+            y "Thank you so much."
+            ys "Alright. I’m gonna wait here with you for half an hour and see
+            how badly your ankle swells."
+            y "Shouldn’t you go back to the A3C?"
+            ys "No my co-chair will be able to handle it today. I need to take care of
+            you."
+            n "You feel the pain go away as she says that and smiles. How does she dance
+            in Kayu, CO, and FFS and also be such a caring RA?"
+            ys "Okay let’s check the swelling now. Hmm, it doesn’t look too bad. How bad
+            does it hurt?"
+            y "Not too bad. But I do feel bad for making you miss Kayu."
+            ys "No don’t worry about it. Everything will work out."
+            y "Yeah. It’s just…"
+            ys "Rest, okay? Is there anything else you want me to get you?"
+            menu:
+                "Actually… I have something to tell you.":
+                    jump .tell_you_Ysabel
+                "I’ll be good.":
+                    jump .be_good
+        label .tell_you_Ysabel:
+            y "Actually, I have something to tell you."
+            ys "Yeah what is it?"
+            y "I like you."
+            ys "Oh my gosh, [name]."
+            y "Yeah, that’s why I went to the CO workshop and why I wanted to
+            go to Kayu."
+            ys "[name]..."
+            y "Yeah I know, but it’s just foolish."
+            ys "[name], I like you too. But I’m also your RA and I have a boyfriend."
+            y "Yeah I know."
+            y "Hey, I think I’ll be able to take care of myself. You should at least
+            get some rest yourself."
+            ys "Are you sure?"
+            y "Yeah."
+            ys "Alright. Have a good night."
+            n "You can’t help but feel a dull pain in your body, and it isn’t in your ankle.
+                It’s in your heart. Why’d someone so wonderful and right come into
+                your life at the wrong time?"
 
 
 label part_three:
