@@ -1083,6 +1083,170 @@ label part_two:
                 $ Manisha_Progress_Two = True
                 jump part_two
 
+    label .Cheng_Hau_Part_Two:
+        n "You go to the lounge where you saw someone carrying IKEA bags. It’s Cheng-Hau"
+        y "Hey Cheng-Hau."
+        c "Hey [name] how are you?"
+        y "I’m fine. What are you up to?
+        c "I’m setting up for Okada Friendsgiving."
+        y "Oh right that’s tonight."
+        c "Yep mmhm. Oh wait, I just got a Slack. Oh, Josh can’t help me decorate anymore. Well I should get started soon."
+        menu:
+            "Can I help?":
+                jump .help
+            "I’ll see you tonight":
+                jump part_two
+
+        label .help:
+            y "Can I help you out?"
+            c "Yeah that’d be great!"
+            y "Alright. What can I do?"
+            c "Can you help me put this tablecloth on?"
+            n "You walk to the other end of the table but trip on a chair and fall. You
+                feel yourself lose balance, and a sense of panic runs through your body. How
+                embarassing, in front of Cheng-Hau, too!"
+            n "All of a sudden, you feel your momentum stop. Graceful, firm arms wrap around your waist with comfort."
+            c "Hehehe, you should be more careful!"
+            y "A-ahh thank you so much!"
+            n "You feel your cheeks reddening, and you hope they don’t let you go.
+                Cheng-Hau holds onto you for a moment too long, and you pause and stare
+                into each other’s eyes."
+            c "Ah, sorry, I blanked out. Here, grab the other end of the tablecloth."
+            n "You walk to the other end of the table, and lock eyes with Cheng-Hau again. You are only a table-length away, but it feels like miles."
+            n "After working hard for an hour, the table whole room looks amazing. You two did a great job! You both sit down and you spot a bottle of Martinelli and wine glasses."
+            c "Thanks so much for helping out today."
+            menu:
+                "Do you want to have a drink?"
+                    jump .drink
+                "Of course. See you tonight."
+                    jump part_two
+
+        label .drink:
+            y "Do you want to have a drink?"
+            n "Cheng-Hau smiles at you."
+            c "I’m glad you asked."
+            n "You two sit and drink the Martinelli, giggling over childhood stories and
+                past experiences."
+            c "Oh, it’s almost time for Friendsgiving with Okada."
+            y "Wow time flies!"
+            menu:
+                "Wait, I have something to tell you."
+                    jump .something
+                "I’ll see you then."
+                    jump part_two
+
+        label .something:
+            y "Wait, I have something to tell you. Ever since I met you and have gotten to know you, you keep amazing me."
+            c "[name] …"
+            y "I like you, Cheng-Hau."
+            c "Ah! You know this can’t happen, right?"
+            y "Yeah, but I can’t stop how I feel about you."
+            c "Well… me too. I like you, too. But we can’t date."
+            n "You look at each other sadly, but full of emotion. Your heart is in jitters,
+                but it is torn. People start coming in for Friendsgiving, and you must part
+                ways for now."
+            $ Cheng_Hau_Progress_Two = True
+            jump part_two
+
+    label .Pao_Part_Two:
+        n "You go down the hall where you saw someone carrying art supplies. It’s Pao."
+        y "Pao. Hello!"
+        p "Hey what’s up [name]?"
+        y "Oh nothing much. What are you up to?"
+        p "I’m about to paint actually. Hey do you want to join me?"
+        menu:
+            "Sure!"
+                jump .sure
+            "No thanks."
+                jump part_two
+
+        label .sure:
+            y "Sure!"
+            p "Thanks for joining me."
+            y "I’m not really good at art. Sorry if I suck."
+            p "It’s okay, everyone starts somewhere. I can teach you and you’ll love it."
+            n "Wow, Pao is always so understanding and thoughtful."
+            n "You two arrive at the art studio and get set up."
+            p "What are you going to paint?"
+            menu:
+                "I’m going to paint you."
+                    jump .you
+                "I’m going to paint this vase."
+                    jump .vase
+
+        label .vase:
+            y "I’m going to paint this vase."
+            p "Okay, you want to start with visualizing the shapes and then drawing it on
+                the canvas."
+            n "Pao takes you through the process carefully, and you notice how good he is
+                at explaining things and how patient and kind he is. He asks you what he
+                should paint."
+            menu:
+                "You should paint me."
+                    jump .paint_me
+                "You should paint this vase as well."
+                    jump .vase_as_well
+
+        label. vase_as_well:
+            y "You should paint this vase."
+            p "Okay, sounds good."
+            n "Pao paints the same vase as you, but his painting is clearly leagues above
+                yours. After finishing, you both part ways.
+	        jump. part_two
+
+        label .paint_me:
+            p "Hahaha. I like that idea. You’re a great subject to paint."
+            n "You blush a bright pink. Pao thinks you’re great to paint??"
+            y "Okay. How should I pose?"
+            p "Just stay as you are. You’d look great in any pose."
+            n "You blush even harder. Pao looks at you intensely, and you notice he starts to blush as well. He looks at you up and down, his eyes scanning your features."
+            p "You’re beautiful."
+            y "Pao... "
+            p "Oh, shoot. I didn’t mean to say that out loud. Ignore what I said..."
+            y "Pao, I can’t ignore that."
+            p "Why not?"
+            menu:
+                "Because I like you."
+                    jump .like
+                "Nevermind…"
+                    jump .nevermind
+
+        label. nevermind:
+            y "Nevermind…"
+            p "Okay."
+            n "Pao finishes painting you and you two part ways."
+            jump part_two
+
+        label. like:
+            y "Because I like you."
+            p "[name]..."
+            y "I know, we can’t be. But you make me feel such ways. I can’t help it."
+            p "Thanks for being honest with me. Because I like you too."
+            n "Your heart jumps with excitement, then drops knowing that you can’t be
+                together."
+            p "Well, these paintings deserve to be finished."
+            n "You scoot closer to Pao, and he finishes his painting while looking at you full of emotion. You two spend the evening together, being present and loving."
+            jump part_two
+
+        label .you:
+            y "I’m going to paint you."
+            p "What? I don’t think I’m the best subject to paint."
+            y "I think you’re perfect."
+            n "You notice Pao blush slightly, and that makes you blush as well."
+            y "I’ll try my best."
+            n "You look at Pao, observing intently at his features. You notice his kind
+                eyes, his soft skin, his nice lips. You lock eyes, and your hand slips and you
+                draw a large black line across the painting."
+            y "Oh no! I’m such a goof."
+            p "Hahaha. I think it looks better now."
+            y "Ahh thanks. I think you should paint, though."
+            p "What should I paint?"
+            menu:
+                "You should paint me."
+                    jump .paint_me
+                "You should paint this vase."
+                    jump .vase_as_well
+
     label .Jihyeon_Part_Two:
         n "You go towards them, and you see that it’s Jihyeon"
         y "Jihyeon! What are you up to?"
@@ -1380,6 +1544,131 @@ label part_three:
             jump .ysabel_part_three
         "Huanvy" if Huanvy_Progress_Two == True:
             jump .huanvy_part_three
+
+    label .jihyeon_part_three:
+        label .Jihyeon_Part_Three:
+            y “I have to find Jihyeon.”
+            n “You look everywhere for Jihyeon, looking in the lounge, knocking
+                on her door, roaming east and west campus.Eventually you decide
+                to look in the computer lounge, and there she is. Her hair looks
+                pretty as ever, and she looks up from the printer and you lock
+                eyes.”
+            y “Jihyeon… I’ve been looking for you everywhere.”
+            j “[name], I… I’ve been looking for you too.”
+            n “You notice she is holding what she just printed.”
+            y “What are you holding?”
+            j “It’s amusement park tickets. For two.”
+            menu:
+                “Is one of them for me?”
+                    jump .for_me
+                “Oh, have fun.”
+                    jump .have_fun
+
+        label .have_fun:
+            y “Oh, have fun.”
+            j “I… nevermind. Thank you, I gotta go before it gets too late.”
+            menu:
+                “Wait!”
+                    jump .for_me
+                “See you…”
+                    jump .see_you
+
+        label. see_you:
+            y “See you…”
+            n “You look at each other sadly for a moment, then she turns and
+                leaves the room. You are left feeling empty, as if you lost out
+                on something great…”
+            scene black
+            with dissolve
+            n “Uwukada. Fin.”
+
+        label .for_me:
+            y “Is one of them for me?”
+            j “Ah I’m so glad you asked!”
+            n “She leans over and you accept her hug, somewhat stunned.”
+            y “Really?”
+            j “Yeah, are you down?”
+            n “You nod, and she grabs your arm and pulls you out of the room
+                excitedly. You walk outside holding hands, and take a ride
+                service to the amusement park. The whole time Jihyeon is talking
+                excitedly about how excited she is about the park, and you feel
+                so nervous to be this close to her and going on a… date?”
+            n “You arrive at the amusement park.”
+            j “Yessss, I’ve been needing a day away!”
+            y “It looks like so much fun!”
+            menu:
+                “Ride the rollercoaster.”
+                    jump .rollercoaster
+                “Eat some food.”
+                    jump .eat
+
+        label .rollercoaster:
+            y “Let’s ride this rollercoaster!”
+            j “Ooh I like that idea.”
+            n “She smirks at you confidently, full of adventure and confidence.
+                When you look up at the rollercoaster again, you feel regret and
+                your stomach drops.”
+            j “What’s up with that face? Don’t be scared, I’m here.”
+            n “Jihyeon holds you closer to her, and you feel comforted by her
+                warm embrace. You stop thinking about the ride and suddenly it’s
+                her that’s making your heart race.”
+            j “Yes, it’s our turn next!”
+            y “Ahhh, let’s get it!”
+            n “You both strap in, and the ride takes you full speed. Both of you
+                scream your lungs out, feeling exhilarated and full of life.”
+            j “Whew, that was so much fun! Let’s go on some more rides.”
+            n “You spend the rest of the day going from ride to ride, having the
+                time of your lives. You can’t tell if it’s Jihyeon or the
+                rollercoasters that’s making your heart race all the time.”
+            j “It’s getting late, we should head back.”
+            menu:
+                “Wait, one more ride…”
+                    jump .one_more
+                “Okay, let’s go.”
+                    jump .leave
+
+        label .leave:
+            y “Okay, let’s go. Thanks for such a fun day today, Jihyeon.”
+            j “Thanks to you!”
+            n “You both take a ride back, and you are so grateful for the time
+                spent. However, you feel as if you missed the chance to say
+                something. You can’t muster the strength to bring up what you
+                originally wanted to. It was a good day, but it feels like there
+                was a missed opportunity…”
+            scene black
+            with dissolve
+            n “Uwukada. Fin.”
+
+        label .one_more:
+            y “Wait, one more ride.”
+            j “Which one are you thinking of?”
+            n “You point at the ferris wheel.”
+            j “Wow, great idea!”
+            n “You both enter the ferris wheel, and you gondola slowly makes its
+                ascent upward. The sky is a beautiful shade, and Jihyeon's eyes
+                reflect the beauty both within and without her. She looks at
+                you, and you look at each other full of emotion.”
+            y “Jihyeon… about what I said about liking you. I still do.”
+            j “Me, too.”
+            y “But we can’t be?”
+            j “You know what, the world can’t tell us what we can or can’t be.
+                Some contract I signed doesn’t determine who I get to love or
+                not love.”
+            y “Love…?”
+            j “...”
+            y “I think… I think I love you.”
+            n “Jihyeon’s eyes widen and her cheeks flush as pink as the sky.”
+            j “I… I love you too. And this is why I’m going to petition to VPTL
+                to let me date. I’ve prepared everything. We can date. I want to
+                be yours.”
+            n “Your heart jumps, and you two lean in closer together. You see
+                her lips, and you lean in for a kiss. You close your eyes and
+                hug her tightly. The moment is perfect, you want it to last
+                forever. The gondola begins its descent as you two begin your
+                new lives together.
+            scene black
+            with dissolve
+            n “Uwukada. Fin.”
 
     label .edwin_part_three:
         y "I have to find Edwin. Where is he?"
