@@ -13,7 +13,10 @@ define p = Character("Pao", who_color="#5cd65c")#green
 define h = Character("Huanvy", who_color="#1ad1ff")#blue
 define d = Character("Edwin", who_color="#df80ff")#purple
 define ys = Character("Ysabel", who_color="#ff9933")#orange
-define b = ("Barista")
+define b = Character("Barista")
+define w = Character("Waiter")
+define mc = Character("Michael Chang")
+define v = Character("Voice")
 
 init python:
     #Progress_One is for if the player has successfully interacted.
@@ -110,11 +113,12 @@ label start:
     y "Ahhh, finally finished unpacking."
     n "It is now night time, and you decide to explore around the dorm."
 
-
-
-    #This label first_night has the menu for the options of where to go
+#This label first_night has the menu for the options of where to go
     label first_night:
         if Jihyeon_Part_One == True or Manisha_Part_One == True or Cheng_Hau_Part_One == True or Pao_Part_One == True or Edwin_Part_One == True or Ysabel_Part_One == True or Huanvy_Part_One == True:
+                scene black
+                with dissolve
+                n "You go back to your room."
                 scene room
                 with dissolve
                 y "What should I do now?"
@@ -273,8 +277,169 @@ label start:
                 "Go back":
                     jump first_night
         label .Pao_first_night:
+            n "You go check out the room where the wise aura is emanating from."
+            if Pao_Introduction_Dialogue == False:
+                p "Oh hey I'm Pao and I use he/him pronouns. I'm the first floor ETA."
+                y "Oh hi I'm [name] and I use [pronouns] pronouns."
+                p "What are you up to?"
+                y "Nothing much."
+                p "Do you want to come in?"
+                menu:
+                    "No thanks":
+                        y "No thanks."
+                        jump first_night
+                    "Sure":
+                        y "Sure."
+                        jump .sure_pao
+            p "Hey, did you change your mind?":
+            menu:
+                "Yes":
+                    jump first_night
+                "No":
+                    jump .sure_pao
+            label .sure_pao:
+                $ Pao_Part_One = True
+                p "Alright cool. Come on in. Have a seat."
+                y "Oh thank you."
+                p "So how's your day been?"
+                y "I'm good."
+                p "No, how do youreally feel?"
+                y "Uhh...."
+                p "I mean, you don't have to feel good all the time."
+                y "I mean, things have been really fun, but I just wish
+                    I could take some more time for myself."
+                p "Would you like to talk about that some more?"
+                menu:
+                    "Yes":
+                        y "Yeah sure why not."
+                        jump .talk_more
+                    "No":
+                        y "No thanks."
+                        jump .talk_no
+            label .talk_more:
+                p "Ok keep going."
+                y "yeah today's just been super busy and I don't know
+                    how I feel about tomorrow."
+                p "It's okay not to know."
+                y "I’m just afraid if I’ll be able to handle all of this new-ness.
+                    And also NSO makes everything seem so fun but what happens when things get hard"
+                p "Yeah I think everyone goes through that feeling. Just know
+                that there are people you can talk to."
+                y "Yeah that makes me feel better I guess."
+                p "Do you want to keep talking?"
+                y "Yeah let's."
+                n "You two delve into a deep conversation. After two hours of talking,
+                    you feel enlightened by Pao's wisdom."
+                y "Wow, thank you, that makes me feel better."
+                p "Anytime you want to talk just come knock on my door."
+                y "Good night."
+                p "Good night."
+                $ Pao_Progress_One = True
+                jump first_night
+            label .talk_no:
+                p "Oh alright. You should probably get some rest."
+                jump first_night
         label .Edwin_first_night:
+            n "You go into the lounge and see Edwin playing smash."
+            n "He seems pretty busy. Wait?"
+            menu:
+                "Yes":
+                    n "You decide to wait."
+                    jump .wait_edwin
+                "No":
+                    n "You decide to go somewhere else."
+                    jump first_night
+            label .wait_edwin:
+                $ Edwin_Part_One = True
+                d "Oh hey [name], I didn't notice you there."
+                y "Hey Edwin, what are you up to?"
+                d "Oh I'm just smashing. You want to play?"
+                menu:
+                    "Sure":
+                        y "Sure."
+                        jump .id_love_to
+                    "No thanks":
+                        y "No thanks."
+                        jump .no_thanks_edwin
+            label .id_love_to:
+                d "Alright cool. Here's the controller."
+                y "Alright what should I do?"
+                d "Just select your character and we'll get started."
+                $ [smash_character] = renpy.input("Character?")
+                y "I'll play ... [smash_character]"
+                d "I'll play Captain Falcon!!!"
+                n "You two start playing. Within the first minute you've
+                    lost all 4 stocks. The knee is too strong."
+                y "Wow you're very good at this game."
+                d "Yeah I've had practice."
+                n "You two keep playing for a few hours."
+                d "Hey that was fun."
+                y "Yeah, I really enjoyed smashing with you."
+                d "Good night."
+                y "Night."
+                $ Edwin_Progress_One = True
+                jump first_night
+            label .no_thanks_edwin:
+                d "Oh alright. Well I'm just going to be smashing."
+                y "Alright see you."
+                n "Edwin is too busy smashing to say good night."
+                jump first_night
         label .Cheng_Hau_first_night:
+            n "You go to the kitchenette."
+            y "Oh hi Cheng-Hau, what are you cooking?"
+            c "Oh hi [name], I'm cooking spam, eggs, and rice."
+            menu:
+                "Www":
+                    y "Eww..."
+                    c "Oh alright."
+                    y "I'll see you around later."
+                    c "Ok see you."
+                    jump first_night
+                "Yum!":
+                    y "Yum!"
+                    jump .yum
+            label .yum:
+                $ Cheng_Hau_Part_One = True
+                c "I know right. Do you want some?"
+                y "Yeah of course."
+                c "Hey, do you think you could help me out?"
+                menu:
+                    "Sure thing!":
+                        y "Sure thing!"
+                        jump .sure_thing
+                    "I'm not sure...":
+                        y "I'm not sure..."
+                        jump .not_sure
+            label .sure_thing:
+                c "Alright great!"
+                y "Ok what can I do?"
+                c "Here you can fry these eggs."
+                y "Ok *fries egg*"
+                n "You try to flip the egg all fancy like, but you fail."
+                y "Oh no!!!"
+                c "*hyu hyu hyu* that's ok we have more eggs."
+                y "Phew. Ok."
+                n "You two finish cooking and then eat."
+                c "This is so good mmmmhhhmmm."
+                y "Yeah so good mmmhhhhmmm."
+                c "Hey thanks for helping me."
+                y "Yeah I enjoyed it."
+                c "Good night."
+                y "Night."
+                $ Cheng_Hau_Progress = True
+                jump first_night
+            label .not_sure:
+                c "Oh alright. Well you can still have some food."
+                n "You wait until Cheng-Hau finishes cooking."
+                c "It's ready."
+                y "Wow this looks so good."
+                n "You fix yourself a plate and then sit down in the foyer.
+                    Cheng-Hau fixes their own plate and then starts walking
+                    to their room."
+                y "Aren't you going to sit down with me?"
+                c "Oh I think I'm going to eat in my room"
+                y "Alright."
+                jump first_night
 
         label .Courtyard_first_night:
             scene courtyard_1
@@ -1051,7 +1216,6 @@ label part_two:
             ys "Alright cool. We should run it’s getting started soon actually."
             n "You run in and the floor is packed with the 50 other members of CO"
             y "Oh hey is that Michael Chang?"
-            define mc = ("Michael Chang")
             mc "Oh what’s up [name]?"
             y "Oh nothing much Ysabel invited me to the workshop."
             mc "Oh cool. Hey it’s pretty packed but there’s some space over there we
@@ -1221,7 +1385,7 @@ label part_three:
         y "I have to find Edwin. Where is he?"
         n "You go searching all throughout campus to find Edwin. His room, the foyer, the
         Teahouse, Jordan Hall, the A3C. But he’s nowhere to be found."
-        define v = ("Voice")
+
         v "Hey"
         y "Huh?"
         v "Hey [name]"
@@ -1467,7 +1631,6 @@ label part_three:
             y "That was nice."
             ys "Yeah that was."
             ys "Oh wow we’re so close to the front."
-            define w = ("Waiter")
             w "Hello, how many?"
             y "Two, please."
             n "You two are lead by the waiter to a table."
